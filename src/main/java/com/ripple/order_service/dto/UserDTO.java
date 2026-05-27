@@ -5,6 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
 
     private String userId;
@@ -14,4 +15,14 @@ public class UserDTO {
     private String tier;
 
     private Integer rewardPoints;
+
+    private String email;
+
+    private String phoneNumber;
+
+    private String address;
+
+    private Double walletBalance;
+
+    private Boolean isActive;
 }
