@@ -22,7 +22,7 @@ public class UserDTO {
 
     private String address;
 
-    private Double walletBalance;
+    private Double walletCredit;
 
     private Boolean isActive;
 }

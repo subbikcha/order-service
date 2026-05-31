@@ -67,7 +67,7 @@ public class OrderService {
 
         // ── 5. Wallet discount: walletBalance ≥ 200 → extra ₹100 off ─────────
         int walletDiscount = 0;
-        if (user.getWalletBalance() != null && user.getWalletBalance() >= 200.0) {
+        if (user.getWalletCredit() != null && user.getWalletCredit() >= 200.0) {
             walletDiscount = 100;
         }
 
