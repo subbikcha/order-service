@@ -17,9 +17,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class OrderService {
+
+    private static final Logger log = LoggerFactory.getLogger(OrderService.class);
 
     private final OrderRepository repository;
     private final RestTemplate restTemplate = new RestTemplate();
@@ -37,7 +42,10 @@ public class OrderService {
                 UserDTO.class
         );
 
-        if (Boolean.FALSE.equals(user.getIsActive())) {
+        if (user.getIsActive() == null) {
+            log.warn("isActive is null for userId={}; treating as active for order processing.", userId);
+        }
+        if (Boolean.FALSE.equals(Objects.requireNonNullElse(user.getIsActive(), true))) {
             throw new IllegalStateException("User account is inactive and cannot place orders.");
         }
 
