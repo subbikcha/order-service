@@ -37,7 +37,7 @@ public class OrderService {
                 UserDTO.class
         );
 
-        if (Boolean.FALSE.equals(user.getIsActive())) {
+        if (!Boolean.TRUE.equals(user.getIsActive())) {
             throw new IllegalStateException("User account is inactive and cannot place orders.");
         }
 
@@ -61,7 +61,7 @@ public class OrderService {
 
         // ── 4. Reward-points discount: 100+ pts → ₹50 off ────────────────────
         int discount = 0;
-        if (user.getRewardPoints() != null && user.getRewardPoints() >= 100) {
+        if (user.getRewardPoints() != null && user.getRewardPoints() >= 1000) {
             discount = 50;
         }
 
