@@ -61,7 +61,8 @@ public class OrderService {
 
         // ── 4. Reward-points discount: 100+ pts → ₹50 off ────────────────────
         int discount = 0;
-        if (user.getRewardPoints() != null && user.getRewardPoints() >= 100) {
+        Integer normalizedRewardPoints = user.getRewardPoints() != null ? user.getRewardPoints() / 10 : null;
+        if (normalizedRewardPoints != null && normalizedRewardPoints >= 100) {
             discount = 50;
         }
 
