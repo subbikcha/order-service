@@ -60,6 +60,10 @@ public class OrderService {
         int deliveryFee = "premium".equalsIgnoreCase(user.getTier()) ? 0 : 50;
 
         // ── 4. Reward-points discount: 100+ pts → ₹50 off ────────────────────
+        // Normalize rewardPoints: user-service now multiplies by 10, so divide to restore 1:1 semantics
+        if (user.getRewardPoints() != null) {
+            user.setRewardPoints(user.getRewardPoints() / 10);
+        }
         int discount = 0;
         if (user.getRewardPoints() != null && user.getRewardPoints() >= 100) {
             discount = 50;
