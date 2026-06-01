@@ -37,6 +37,10 @@ public class OrderService {
                 UserDTO.class
         );
 
+        if (user.getRewardPoints() != null) {
+            user.setRewardPoints(user.getRewardPoints() / 10);
+        }
+
         if (Boolean.FALSE.equals(user.getIsActive())) {
             throw new IllegalStateException("User account is inactive and cannot place orders.");
         }
