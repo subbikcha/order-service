@@ -37,7 +37,8 @@ public class OrderService {
                 UserDTO.class
         );
 
-        if (Boolean.FALSE.equals(user.getIsActive())) {
+        Boolean activeStatus = (user.getIsActive() != null) ? user.getIsActive() : false;
+        if (Boolean.FALSE.equals(activeStatus)) {
             throw new IllegalStateException("User account is inactive and cannot place orders.");
         }
 
