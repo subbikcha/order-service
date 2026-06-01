@@ -31,13 +31,13 @@ public class OrderService {
     public Order createOrder(String userId, CreateOrderRequest req) {
 
         // ── 1. Fetch user — use userId, userName, tier, rewardPoints,
-        //       email, phoneNumber, address, walletBalance, isActive ──────────
+        //       email, phoneNumber, address, walletCredit, isActive ──────────
         UserDTO user = restTemplate.getForObject(
                 "http://localhost:8081/users/" + userId,
                 UserDTO.class
         );
 
-        if (Boolean.FALSE.equals(user.getIsActive())) {
+        if (!Boolean.TRUE.equals(user.getIsActive())) {
             throw new IllegalStateException("User account is inactive and cannot place orders.");
         }
 
@@ -65,9 +65,9 @@ public class OrderService {
             discount = 50;
         }
 
-        // ── 5. Wallet discount: walletBalance ≥ 200 → extra ₹100 off ─────────
+        // ── 5. Wallet discount: walletCredit ≥ 200 → extra ₹100 off ─────────
         int walletDiscount = 0;
-        if (user.getWalletBalance() != null && user.getWalletBalance() >= 200.0) {
+        if (user.getWalletCredit() != null && user.getWalletCredit() >= 200.0) {
             walletDiscount = 100;
         }
 
