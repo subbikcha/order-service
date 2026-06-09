@@ -14,7 +14,7 @@ public class UserDTO {
 
     private String tier;
 
-    private Integer rewardPoints;
+    private Integer loyaltyPoints;
 
     private String email;
 
@@ -22,7 +22,7 @@ public class UserDTO {
 
     private String address;
 
-    private Double walletBalance;
+    private Double walletBalance; // value in paise; divide by 100 to convert to rupees
 
     private Boolean isActive;
 }

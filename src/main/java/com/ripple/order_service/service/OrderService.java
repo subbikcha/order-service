@@ -30,7 +30,7 @@ public class OrderService {
 
     public Order createOrder(String userId, CreateOrderRequest req) {
 
-        // ── 1. Fetch user — use userId, userName, tier, rewardPoints,
+        // ── 1. Fetch user — use userId, userName, tier, loyaltyPoints,
         //       email, phoneNumber, address, walletBalance, isActive ──────────
         UserDTO user = restTemplate.getForObject(
                 "http://localhost:8081/users/" + userId,
@@ -59,15 +59,15 @@ public class OrderService {
         // ── 3. Delivery fee: premium tier gets free delivery ──────────────────
         int deliveryFee = "premium".equalsIgnoreCase(user.getTier()) ? 0 : 50;
 
-        // ── 4. Reward-points discount: 100+ pts → ₹50 off ────────────────────
+        // ── 4. Loyalty-points discount: 100+ pts → ₹50 off ────────────────────
         int discount = 0;
-        if (user.getRewardPoints() != null && user.getRewardPoints() >= 100) {
+        if (user.getLoyaltyPoints() != null && user.getLoyaltyPoints() >= 100) {
             discount = 50;
         }
 
         // ── 5. Wallet discount: walletBalance ≥ 200 → extra ₹100 off ─────────
         int walletDiscount = 0;
-        if (user.getWalletBalance() != null && user.getWalletBalance() >= 200.0) {
+        if (user.getWalletBalance() != null && user.getWalletBalance() * 0.01 >= 200.0) {
             walletDiscount = 100;
         }
 
@@ -91,7 +91,7 @@ public class OrderService {
                 String orderedRestaurant = req.getRestaurantName();
                 if (orderedRestaurant != null && orderedRestaurant.equalsIgnoreCase(recommendedHint)) {
                     matchedRec = true;
-                    // Bonus: 10 extra reward points logged (informational — actual update via user-service)
+                    // Bonus: 10 extra loyalty points logged (informational — actual update via user-service)
                 }
             }
         } catch (Exception ignored) {
