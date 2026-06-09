@@ -375,13 +375,13 @@ components:
         cancelledOrders:
           type: integer
           description: Number of cancelled orders
-        matchedRecommendations:
+        recommendationMatchedOrders:
           type: integer
           description: Number of orders that matched a user recommendation
         totalRevenue:
           type: integer
           description: Total revenue from delivered orders
-        totalWalletSavings:
+        walletDiscountsTotal:
           type: integer
           description: Total wallet discounts applied across all orders
 
