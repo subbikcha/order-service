@@ -14,7 +14,7 @@ public class UserDTO {
 
     private String tier;
 
-    private Integer rewardPoints;
+    private Integer loyaltyPoints;
 
     private String email;
 
